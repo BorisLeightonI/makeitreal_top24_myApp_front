@@ -1,0 +1,21 @@
+form {
+  margin-right: 10px;
+}
+.user-div a{
+  justify-content: end;
+}
+nav {
+  background-color: black;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: -111px;
+}
+
+@media screen and (max-width: 990px) {
+  .dropdown-menu[data-bs-popper] {
+    position: relative;
+    left: 0;
+    width: 150px;
+  }
+}
