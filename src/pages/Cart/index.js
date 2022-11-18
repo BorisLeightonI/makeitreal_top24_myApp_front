@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CardComp from "../../components/Card";
@@ -8,12 +9,14 @@ import CardComp from "../../components/Card";
 function Cart() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
-  const cart = localStorage.getItem('cart')
+  // const cart = localStorage.getItem('cart')
+  const cart = useSelector(state => state.toCart)
   useEffect(()=>{
-    axios.post('http://localhost:8080/api/products/cart', {cart})
+/*     axios.post('http://localhost:8080/api/products/cart', {cart})
       .then(res => setProducts(res.data.data))
       .catch(err => console.error(err))
-      .finally(()=>setLoading(false))
+      .finally(()=>setLoading(false)) */
+      console.table(cart)
   },[])
   const handleClick = (e)=>{
     e.preventDefault()
@@ -24,7 +27,7 @@ function Cart() {
     <h3>Por el momento es el fin del flujo</h3>
     <ToastContainer/>
     <Container className="products-container">
-    {!loading&&
+    {!loading&&products&&
       products.map(prod => 
         <CardComp key={prod._id} 
           id = {prod._id}

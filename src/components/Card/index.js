@@ -15,7 +15,7 @@ function CardComp({id,title, body, img, btnText, clickExterno}) {
       <Button 
         onClick={clickExterno} 
         variant="primary"
-        name={id}
+        value={id}
       >{btnText}</Button>
     </Card.Body>
   </Card>

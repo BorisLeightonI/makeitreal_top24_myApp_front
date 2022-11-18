@@ -6,11 +6,14 @@ import './index.css';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addToCart } from "../../store/slices/cart";
 
 function Products({category}) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true);
   const [cartProducts, setCartProducts] = useState([])
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(()=>{
     axios.get(`http://localhost:8080/api/products/all?category=${category}`)
@@ -20,8 +23,9 @@ function Products({category}) {
   },[category])
   const handleClick = (e)=>{
     e.preventDefault()
-    console.log('desde product', e.target.name)
-    setCartProducts(cart => [...cart, e.target.name])
+    console.log('desde product', e.target.name, e.target.value)
+    // setCartProducts(cart => [...cart, e.target.name])
+    dispatch(addToCart(e.target.value))
     toast.success('Product added to Cart', {autoClose:2000})
   }
   const handleCart = (e) => {
@@ -41,7 +45,7 @@ function Products({category}) {
           title={prod.name} 
           body={prod.description} 
           img={prod.mediaResources[1]}
-          btnText = {'add'}
+          btnText = {'add to cart'}
           clickExterno={handleClick}
         />)}
   </Container>
