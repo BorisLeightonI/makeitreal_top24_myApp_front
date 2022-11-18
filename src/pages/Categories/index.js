@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Accordion, Button, Col, Container, Row, Table } from "react-bootstrap";
 import ModalEdit from "../../components/ModalEdit";
 import './index.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -17,6 +19,7 @@ function Categories() {
           setLoading(true);
           console.log('res.data:',res.data);
           setCategories(res.data.data);
+          toast.success('Categories loaded successfully', {autoClose:3500})
         })
         .catch(err => console.error(err))
         .finally(()=>{
@@ -33,6 +36,7 @@ function Categories() {
       .then(res => {
         console.log(res);
         setSubmitFlag(res.data.data._id);
+        toast.success('Category added successfully', {autoClose:3500})
       })
       .catch(err => console.error(err))
   }
@@ -40,6 +44,7 @@ function Categories() {
     setModal(modal => !modal);
   }
   return ( <div>
+    <ToastContainer />
     <h1>Ingrese una nueva Categoría</h1>
     <Container>
       <Row>
