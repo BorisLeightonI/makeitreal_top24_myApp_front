@@ -12,10 +12,10 @@ function Cart() {
   // const cart = localStorage.getItem('cart')
   const cart = useSelector(state => state.toCart)
   useEffect(()=>{
-/*     axios.post('http://localhost:8080/api/products/cart', {cart})
+    axios.post('http://localhost:8080/api/products/cart', {cart: JSON.stringify(cart)})
       .then(res => setProducts(res.data.data))
       .catch(err => console.error(err))
-      .finally(()=>setLoading(false)) */
+      .finally(()=>setLoading(false))
       console.table(cart)
   },[])
   const handleClick = (e)=>{
